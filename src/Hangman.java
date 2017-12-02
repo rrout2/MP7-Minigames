@@ -19,7 +19,7 @@ public class Hangman {
 		Scanner kb = new Scanner(System.in);
 		while(chancesLeft > 0 && !solved) {
 			System.out.println("Your word so far is " + String.valueOf(wordSoFar) + ".\nYou have " + chancesLeft + " chances left. What letter is your next guess?");
-			char guess = kb.next().charAt(0);
+			char guess = kb.next().toLowerCase().charAt(0);
 			guess(guess);
 			if (String.valueOf(wordSoFar).equals(String.valueOf(wordToGuess))) solved = true;
 		}
@@ -32,13 +32,13 @@ public class Hangman {
 		kb.close();
 	}
 	
-	public void guess(char c) {
+	private void guess(char c) {
 		boolean contains = false;
 		for (char elem : wordToGuess) {
 			if (elem == c) contains = true;
 		}
 		if(contains) {
-			
+			System.out.println("The word contains " + c + "!");
 			String throwaway = String.valueOf(wordToGuess);
 			while(throwaway.indexOf(c) >= 0) {
 				wordSoFar[throwaway.indexOf(c)] = c;
@@ -47,12 +47,15 @@ public class Hangman {
 			}
 			
 		} else {
+			System.out.println("The word doesn't contain " + c + "!");
 			chancesLeft--;
 		}
 	}
 	
 	public static void main(String[] args) {
-		Hangman test = new Hangman("cs rocks".toCharArray());
+		String[] possibilities = new String[]{"cs rocks", "illinois is better than michigan", "wisconsin sux", "i love pokemon", "ultimate is the best sport"};
+		int choice = (int)(Math.random() * (possibilities.length));
+		Hangman test = new Hangman(possibilities[choice].toCharArray());
 		test.play();
 	}
 }
