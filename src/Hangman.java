@@ -1,9 +1,12 @@
 import java.util.*;
 public class Hangman {
-	private char[] wordToGuess;
+	private static final String[] possibilities = new String[]{"cs rocks", "illinois is better than michigan", "wisconsin sux", "i love pokemon", "ultimate is the best sport"};
+	private final char[] wordToGuess;
 	private char[] wordSoFar;
 	private int chancesLeft;
-	boolean solved;
+	private boolean solved;
+	private int movesTaken = 0; 
+	
 	public Hangman(char[] word) {
 		wordToGuess = word;
 		wordSoFar = new char[word.length];
@@ -11,7 +14,7 @@ public class Hangman {
 			if (word[i] == ' ') wordSoFar[i] = ' ';
 			else wordSoFar[i] = '_';
 		}
-		chancesLeft = word.length * 2 / 3;
+		chancesLeft = word.length / 3;
 		solved = false;
 	}
 	
@@ -20,14 +23,15 @@ public class Hangman {
 		while(chancesLeft > 0 && !solved) {
 			System.out.println("Your word so far is " + String.valueOf(wordSoFar) + ".\nYou have " + chancesLeft + " chances left. What letter is your next guess?");
 			char guess = kb.next().toLowerCase().charAt(0);
+			movesTaken++;
 			guess(guess);
 			if (String.valueOf(wordSoFar).equals(String.valueOf(wordToGuess))) solved = true;
 		}
 		
 		if (solved) {
-			System.out.println("Congrats! You won on the word " + String.valueOf(wordToGuess) + "!");
+			System.out.println("Congrats! You won on the word/phrase \"" + String.valueOf(wordToGuess) + "\" in " + movesTaken + " guesses!");
 		} else {
-			System.out.println("Oooh, you lost on the word " + String.valueOf(wordToGuess) + "!");
+			System.out.println("Oooh, you lost on the word/phrase " + String.valueOf(wordToGuess) + "!");
 		}
 		kb.close();
 	}
@@ -53,7 +57,6 @@ public class Hangman {
 	}
 	
 	public static void main(String[] args) {
-		String[] possibilities = new String[]{"cs rocks", "illinois is better than michigan", "wisconsin sux", "i love pokemon", "ultimate is the best sport"};
 		int choice = (int)(Math.random() * (possibilities.length));
 		Hangman test = new Hangman(possibilities[choice].toCharArray());
 		test.play();
