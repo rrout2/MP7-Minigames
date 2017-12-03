@@ -1,6 +1,8 @@
 import java.util.*;
 public class Hangman {
-	private static final String[] possibilities = new String[]{"cs rocks", "illinois is better than michigan", "wisconsin sux", "i love pokemon", "ultimate is the best sport"};
+	private static final String[] possibilities = new String[]{"cs rocks", "illinois is better than michigan", "wisconsin sux", 
+	"i love pokemon", "ultimate is the best sport", "bill chapman", 
+	"lawrence angrave", "geoffrey challen"};
 	private final char[] wordToGuess;
 	private char[] wordSoFar;
 	private int chancesLeft;
