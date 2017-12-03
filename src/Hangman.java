@@ -7,7 +7,11 @@ public class Hangman {
 	private char[] wordSoFar;
 	private int chancesLeft;
 	private boolean solved;
-	private int movesTaken = 0; 
+	private int movesTaken; 
+	private String[] ascii = new String[]{
+		"   ________\n   |      |\n   |\n   |\n   |\n   |\n   |\n_______",
+		"   ________\n   |      |\n   |      O\n   |\n   |\n   |\n   |\n_______",
+		"   ________\n   |      |\n   |      O\n   |      |\n   |\n   |\n   |\n_______"};
 	
 	public Hangman(char[] word) {
 		wordToGuess = word;
@@ -18,6 +22,7 @@ public class Hangman {
 		}
 		chancesLeft = word.length / 3;
 		solved = false;
+		movesTaken = 0;
 	}
 	
 	public void play() {
@@ -32,6 +37,7 @@ public class Hangman {
 		
 		if (solved) {
 			System.out.println("Congrats! You won on the word/phrase \"" + String.valueOf(wordToGuess) + "\" in " + movesTaken + " guesses!");
+			System.out.println(ascii[1]);
 		} else {
 			System.out.println("Oooh, you lost on the word/phrase " + String.valueOf(wordToGuess) + "!");
 		}
