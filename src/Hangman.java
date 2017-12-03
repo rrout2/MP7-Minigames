@@ -7,8 +7,10 @@ public class Hangman {
 	private char[] wordSoFar;
 	private int chancesLeft;
 	private boolean solved;
-	private int movesTaken; 
-	private String[] ascii = new String[]{
+	private int movesTaken;
+	private ArrayList<Character> used;
+	private int wrongGuesses;
+	private static String[] ascii = new String[]{
 		"   ________\n   |      |\n   |\n   |\n   |\n   |\n   |\n_______",
 		"   ________\n   |      |\n   |      O\n   |\n   |\n   |\n   |\n_______",
 		"   ________\n   |      |\n   |      O\n   |      |\n   |\n   |\n   |\n_______"};
@@ -20,9 +22,11 @@ public class Hangman {
 			if (word[i] == ' ') wordSoFar[i] = ' ';
 			else wordSoFar[i] = '_';
 		}
-		chancesLeft = word.length / 3;
+		chancesLeft = word.length / 2;
 		solved = false;
 		movesTaken = 0;
+		used = new ArrayList<Character>();
+		wrongGuesses = 0;
 	}
 	
 	public void play() {
@@ -33,11 +37,11 @@ public class Hangman {
 			movesTaken++;
 			guess(guess);
 			if (String.valueOf(wordSoFar).equals(String.valueOf(wordToGuess))) solved = true;
+			used.add(guess);
 		}
 		
 		if (solved) {
 			System.out.println("Congrats! You won on the word/phrase \"" + String.valueOf(wordToGuess) + "\" in " + movesTaken + " guesses!");
-			System.out.println(ascii[1]);
 		} else {
 			System.out.println("Oooh, you lost on the word/phrase " + String.valueOf(wordToGuess) + "!");
 		}
@@ -45,6 +49,10 @@ public class Hangman {
 	}
 	
 	private void guess(char c) {
+		if(used.contains(c)) {
+			System.out.println("You've already tried that letter!");
+			return;
+		}
 		boolean contains = false;
 		for (char elem : wordToGuess) {
 			if (elem == c) contains = true;
@@ -61,6 +69,7 @@ public class Hangman {
 		} else {
 			System.out.println("The word doesn't contain " + c + "!");
 			chancesLeft--;
+			wrongGuesses++;
 		}
 	}
 	

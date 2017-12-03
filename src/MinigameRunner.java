@@ -4,10 +4,10 @@ public class MinigameRunner {
 	public static void main(String[] args) {
 		Scanner kb  = new Scanner (System.in);
 		System.out.print("What game would you like to play?\n1: Hangman\n2: Tic-Tac-Toe\nPick a number 1-2: ");
-		int choice = kb.nextInt();
-		if (choice == 1) {
+		int choice = (int)(kb.next().charAt(0));
+		if (choice == 49) {
 			Hangman.main(args);
-		} else if (choice == 2) {
+		} else if (choice == 50) {
 			;
 			// @Aditya you can put whatever you want in here to run Tic Tac Toe
 		} else {
