@@ -8,8 +8,7 @@ public class MinigameRunner {
 		if (choice == 49) {
 			Hangman.main(args);
 		} else if (choice == 50) {
-			;
-			// @Aditya you can put whatever you want in here to run Tic Tac Toe
+			TicTacToe.main(args);
 		} else {
 			System.out.print("Pick a number 1-2 please. ");
 			main(args);
