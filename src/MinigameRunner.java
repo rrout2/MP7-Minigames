@@ -14,6 +14,8 @@ public class MinigameRunner {
 			main(args);
 		}
 		kb.close();
+		
 	}
+	
 
 }
